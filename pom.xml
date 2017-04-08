@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>hessian.demo</groupId>
+    <artifactId>hessian.demo</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+
+    <modules>
+        <module>hessian.api.demo</module>
+        <module>hessian.controller.demo</module>
+        <module>hessian.service.demo</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring.version>4.2.6.RELEASE</spring.version>
+        <spring.security.version>3.2.6.RELEASE</spring.security.version>
+        <aspectjweaver.version>1.6.8</aspectjweaver.version>
+        <mysql.connector.version>5.1.30.nd.1.9</mysql.connector.version>
+        <alibaba.druid.version>1.0.20</alibaba.druid.version>
+        <mybatis.generator.version>1.3.2</mybatis.generator.version>
+        <mybatis.spring.version>1.2.4</mybatis.spring.version>
+        <mybatis.version>3.3.0</mybatis.version>
+        <log4j.version>2.6</log4j.version>
+        <jedis.version>2.8.0</jedis.version>
+        <java.version>1.7</java.version>
+        <jackson.version>2.8.1</jackson.version>
+
+        <commons.lang3.version>3.3</commons.lang3.version>
+        <amqp.client.version>3.6.2</amqp.client.version>
+    </properties>
+
+</project>

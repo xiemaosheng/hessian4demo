@@ -1,0 +1,44 @@
+########################################### log ###############################################################
+log4j.level=INFO
+
+############################################ druid ###############################################################
+#druid.url=jdbc:mysql:fabric://qa1.rds.sdp.nd:32271/qa_mysql_pbl4task?fabricServerGroup=my_group_3307&fabricUsername=admin&fabricPassword=ZB5dGGTJtsC8t7OQ&autoReconnect=true&useUnicode=true&characterEncoding=UTF8
+#druid.user=user_7tqA15QLeZ
+#druid.password=Khc8K5QBI7
+#
+#log.druid.url=jdbc:mysql:fabric://qa1.rds.sdp.nd:32271/qa_mysql_task4log?fabricServerGroup=my_group_3307&fabricUsername=admin&fabricPassword=ZB5dGGTJtsC8t7OQ&autoReconnect=true&useUnicode=true&characterEncoding=UTF8
+#log.druid.user=user_6np4Fxi2kB
+#log.druid.password=OiQ4T3vpU5
+
+########################################### MongoDB configuration ###############################################################
+mongo.host=mongodb://qa_mdb_task4config:bWgrm2tK2mvo@172.24.133.60:34001,172.24.133.62:34001,172.24.133.61:34001/qa_mdb_task4config?autoConnectRetry=true
+
+
+############################################ Redis configuration ###############################################################
+##host
+#redis.host=zjl.pblsys.statapp.dev.redis.sdp
+##port
+#redis.port=8389
+##timeout
+#redis.timeout=5000
+##namespace
+#redis.namespace=resque
+##database
+#redis.database=2
+##password
+#redis.password=
+#
+#redis.order.database=4
+#
+############################################ Pack ###############################################################
+#pack.uri = http://pack.beta.web.sdp.101.com/v0.3
+#
+############################################ pbl rabbit##########################################################
+#rabbit.host=cl-dev-all-rabbitmq-pbl-7tbhha8h.docker.sdp
+#rabbit.vhost=pbl
+#rabbit.username=admin
+#rabbit.password=a5dAwyAtlk47
+#rabbit.port=5684
+#
+############################################ VIP ##########################################################
+#vip.uri=https://pbl4vip.beta.101.com

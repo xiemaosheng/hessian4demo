@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="sdp_log" monitorInterval="0" strict="false">
+	<properties>
+		<property name="patternLayout">%d{MM-dd HH:mm:ss:SSS} %-1p{length=1} %c{36}(%L) - %m%n%throwable{full}</property>
+		<property name="internalLogName">logs/internal.log</property>
+		<property name="externalLogName">logs/external.log</property>
+		<property name="appLogName">logs/app.log</property>
+		<property name="internalLogNamePattern">logs/$${date:yyyy-MM}/internal-%d{yyyy-MM-dd}-%i.log.gz</property>
+		<property name="externalLogNamePattern">logs/$${date:yyyy-MM}/external-%d{yyyy-MM-dd}-%i.log.gz</property>
+		<property name="appLogNamePattern">logs/$${date:yyyy-MM}/app-%d{yyyy-MM-dd}-%i.log.gz</property>
+	</properties>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="${patternLayout}" />
+		</Console>
+		<RollingRandomAccessFile name="internalFileAppender" fileName="${internalLogName}" filePattern="${internalLogNamePattern}">
+			<PatternLayout>
+				<Pattern>${patternLayout}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="50MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="1" fileIndex="max" min="1" compressionLevel="0" />
+			<MarkerFilter marker="INT" onMatch="ACCEPT" onMismatch="DENY"/>
+		</RollingRandomAccessFile>
+		
+		<RollingRandomAccessFile name="externalFileAppender" fileName="${externalLogName}" filePattern="${externalLogNamePattern}">
+			<PatternLayout>
+				<Pattern>${patternLayout}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="50MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="1" fileIndex="max" min="1" compressionLevel="0" />
+			<MarkerFilter marker="EXT" onMatch="ACCEPT" onMismatch="DENY"/>
+		</RollingRandomAccessFile>
+		
+		<RollingRandomAccessFile name="appFileAppender" fileName="${appLogName}" filePattern="${appLogNamePattern}">
+			<PatternLayout>
+				<Pattern>${patternLayout}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<OnStartupTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="50MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="100" fileIndex="max" min="1" compressionLevel="0" />
+		</RollingRandomAccessFile>
+	</Appenders>
+	<Loggers>
+		<asyncRoot level="${log4j.level}" includeLocation="true">
+			<AppenderRef ref="Console"/>
+			<AppenderRef ref="internalFileAppender"/>
+			<AppenderRef ref="externalFileAppender"/>
+			<AppenderRef ref="appFileAppender"/>
+		</asyncRoot>
+	</Loggers>
+</Configuration>
