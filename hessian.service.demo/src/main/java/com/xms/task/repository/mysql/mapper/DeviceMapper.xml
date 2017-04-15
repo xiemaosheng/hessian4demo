@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xms.task.repository.mysql.mapper.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.xms.task.repository.mysql.criteria.Device" >
+    <id column="device_sn" property="deviceSn" jdbcType="VARCHAR" />
+    <result column="device_cat_id" property="deviceCatId" jdbcType="INTEGER" />
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+    <result column="device_type" property="deviceType" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="count" parameterType="com.xms.task.repository.mysql.criteria.DevicePOJO" useCache="false"
+          statementType="CALLABLE">
+    <![CDATA[
+        call countDevicesName(
+        #{devoceName,mode=IN,jdbcType=VARCHAR},
+        #{deviceCount,mode=OUT,jdbcType=INTEGER});
+        ]]>
+  </select>
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    device_sn, device_cat_id, device_name, device_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xms.task.repository.mysql.criteria.DeviceCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>-1" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from device
+    where device_sn = #{deviceSn,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from device
+    where device_sn = #{deviceSn,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xms.task.repository.mysql.criteria.DeviceCriteria" >
+    delete from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xms.task.repository.mysql.criteria.Device" >
+    insert into device (device_sn, device_cat_id, device_name, 
+      device_type)
+    values (#{deviceSn,jdbcType=VARCHAR}, #{deviceCatId,jdbcType=INTEGER}, #{deviceName,jdbcType=VARCHAR}, 
+      #{deviceType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xms.task.repository.mysql.criteria.Device" >
+    insert into device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deviceSn != null" >
+        device_sn,
+      </if>
+      <if test="deviceCatId != null" >
+        device_cat_id,
+      </if>
+      <if test="deviceName != null" >
+        device_name,
+      </if>
+      <if test="deviceType != null" >
+        device_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deviceSn != null" >
+        #{deviceSn,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceCatId != null" >
+        #{deviceCatId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceName != null" >
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null" >
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xms.task.repository.mysql.criteria.DeviceCriteria" resultType="java.lang.Integer" >
+    select count(*) from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update device
+    <set >
+      <if test="record.deviceSn != null" >
+        device_sn = #{record.deviceSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceCatId != null" >
+        device_cat_id = #{record.deviceCatId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceName != null" >
+        device_name = #{record.deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceType != null" >
+        device_type = #{record.deviceType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update device
+    set device_sn = #{record.deviceSn,jdbcType=VARCHAR},
+      device_cat_id = #{record.deviceCatId,jdbcType=INTEGER},
+      device_name = #{record.deviceName,jdbcType=VARCHAR},
+      device_type = #{record.deviceType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xms.task.repository.mysql.criteria.Device" >
+    update device
+    <set >
+      <if test="deviceCatId != null" >
+        device_cat_id = #{deviceCatId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceName != null" >
+        device_name = #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null" >
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where device_sn = #{deviceSn,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xms.task.repository.mysql.criteria.Device" >
+    update device
+    set device_cat_id = #{deviceCatId,jdbcType=INTEGER},
+      device_name = #{deviceName,jdbcType=VARCHAR},
+      device_type = #{deviceType,jdbcType=VARCHAR}
+    where device_sn = #{deviceSn,jdbcType=VARCHAR}
+  </update>
+  <insert id="batchInsert">
+    <if test="items.get(0) != null">
+            insert into device  (device_sn, device_cat_id, device_name, 
+        device_type)
+      values
+      <foreach collection="items" item="item" index="index" separator=",">
+      (#{item.deviceSn,jdbcType=VARCHAR}, #{item.deviceCatId,jdbcType=INTEGER}, #{item.deviceName,jdbcType=VARCHAR}, 
+        #{item.deviceType,jdbcType=VARCHAR})
+      </foreach>
+    </if>
+  </insert>
+  <select resultMap="BaseResultMap" parameterType="com.xms.task.repository.mysql.criteria.DeviceCriteria" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>-1" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+</mapper>

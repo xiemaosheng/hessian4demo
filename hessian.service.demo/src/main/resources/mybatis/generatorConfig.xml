@@ -51,7 +51,7 @@
         </javaClientGenerator>
 
 
-        <table tableName="orders" domainObjectName="Orders">
+        <table tableName="device" domainObjectName="Device">
             <!--<property name="sliceDaily" value="1"/>-->
             <!--<property name="sliceColumn" value="create_time"/>-->
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
