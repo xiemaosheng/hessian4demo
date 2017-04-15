@@ -8,6 +8,7 @@
     <result column="device_type" property="deviceType" jdbcType="VARCHAR" />
   </resultMap>
 
+  <!-- 调用存储过程-->
   <select id="count" parameterType="com.xms.task.repository.mysql.criteria.DevicePOJO" useCache="false"
           statementType="CALLABLE">
     <![CDATA[
@@ -16,6 +17,14 @@
         #{deviceCount,mode=OUT,jdbcType=INTEGER});
         ]]>
   </select>
+  <!-- 调用视图 -->
+  <select id ="get_view" resultType= "java.util.Map" parameterType="java.lang.Integer">
+    select
+    device_name
+    from v_device where device_cat_id = #{deviceCatId}
+  </select>
+
+
 
   <sql id="Example_Where_Clause" >
     <where >

@@ -7,7 +7,7 @@ CREATE TABLE `device` (
   PRIMARY KEY (`device_sn`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/* 存储过程*/
+/* 存储过程 */
 DROP PROCEDURE IF EXISTS `countDevicesName`;
 DELIMITER ;;
 CREATE  PROCEDURE `countDevicesName`(IN dName VARCHAR(12),OUT deviceCount INT)
@@ -17,3 +17,8 @@ SELECT COUNT(*) INTO deviceCount  FROM cus_device WHERE device_name = dName;
 END
 ;;
 DELIMITER ;
+
+/* 创建视图 */
+CREATE OR replace VIEW  v_device AS
+  SELECT device_name,device_type
+    FROM device;

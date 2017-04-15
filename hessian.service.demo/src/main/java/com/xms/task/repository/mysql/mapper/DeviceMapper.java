@@ -3,6 +3,7 @@ package com.xms.task.repository.mysql.mapper;
 import com.xms.task.repository.mysql.criteria.Device;
 import com.xms.task.repository.mysql.criteria.DeviceCriteria;
 import java.util.List;
+import java.util.Map;
 
 import com.xms.task.repository.mysql.criteria.DevicePOJO;
 import org.apache.ibatis.annotations.Param;
@@ -36,4 +37,6 @@ public interface DeviceMapper {
     void batchInsert(@Param("items") List<Device> items);
 
     void count(DevicePOJO devicePOJO);
+
+    Map getView(int deviceCatId);
 }
