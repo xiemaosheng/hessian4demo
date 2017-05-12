@@ -37,7 +37,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * Created by Administrator on 2017/4/8 0008.
  */
 @Configuration
-@Import(value = {MongoConfig.class})
+@Import(value = {})
 @ComponentScan(basePackages = {"com.xms.task.service", "com.xms.task.component", "com.xms.task.repository"})
 @PropertySource(value = {"classpath:application.properties"})
 // cgLib 可以不用接口，它底层调用asm 动态生成一个代理类去覆盖父类中非 final 的方法，然后实现 MethodInterceptor 接口的

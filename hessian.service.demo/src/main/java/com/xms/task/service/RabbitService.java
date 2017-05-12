@@ -16,27 +16,27 @@ import java.nio.charset.StandardCharsets;
  */
 @Component
 public class RabbitService {
-    @Resource(name = "directTemplate")
-    private AmqpTemplate directTemplate;
-
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
-    public void sendMessage(String routingKey, Object message) {
-        directTemplate.convertAndSend(routingKey, message);
-    }
-
-    public void sendMessage(String route, String receiptHandle, Object body) {
-        if (null != body) {
-            EventMessage eventMessage = new EventMessage();
-            eventMessage.setBody(JSON.toJSONString(body).getBytes(StandardCharsets.UTF_8));
-            eventMessage.setReceiptHandle(receiptHandle);
-            try {
-                sendMessage(route, eventMessage);
-            } catch (Throwable e) {
-                logger.error("Send rabbit fail! Message body: {}, Exception:{}", eventMessage.toString(), e);
-                throw e;
-            }
-            logger.debug("Send rabbit success! Message body: {}", eventMessage.toString());
-        }
-    }
+//    @Resource(name = "directTemplate")
+//    private AmqpTemplate directTemplate;
+//
+//    private final Logger logger = LoggerFactory.getLogger(getClass());
+//
+//    public void sendMessage(String routingKey, Object message) {
+//        directTemplate.convertAndSend(routingKey, message);
+//    }
+//
+//    public void sendMessage(String route, String receiptHandle, Object body) {
+//        if (null != body) {
+//            EventMessage eventMessage = new EventMessage();
+//            eventMessage.setBody(JSON.toJSONString(body).getBytes(StandardCharsets.UTF_8));
+//            eventMessage.setReceiptHandle(receiptHandle);
+//            try {
+//                sendMessage(route, eventMessage);
+//            } catch (Throwable e) {
+//                logger.error("Send rabbit fail! Message body: {}, Exception:{}", eventMessage.toString(), e);
+//                throw e;
+//            }
+//            logger.debug("Send rabbit success! Message body: {}", eventMessage.toString());
+//        }
+//    }
 }

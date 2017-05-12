@@ -13,6 +13,7 @@ import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.springframework.data.redis.core.HashOperations;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -317,33 +318,30 @@ public class ExcelUtil {
     public static void main(String[] args) throws IOException {
         int count = 100000;
         JSONArray ja = new JSONArray();
-        for (long i = 0; i < 10; i++) {
+        for (long i = 0; i < 2; i++) {
             UserRewardImportLog log = new UserRewardImportLog();
-            log.setId(i);
-            log.setTenantId("9266c19c6fa148abaef7108cfea63723");
-            log.setUid(145310l);
-            log.setSource("TEST_XMS_IMPORT"+i);
+
             log.setTitle("没有奖励");
-            log.setRewardCode("reward"+i);
-            log.setRewards("[{\"code\":\"exp\",num\":100,},{\"code\":\"gold\",\"num\":100,}]");
-            log.setAutoGained(false);
-            log.setCreateTime(new Date());
-            log.setUpdateTime(new Date());
-//            s.setSex(i/2==0?false:true);
+            log.setUid(145310l);
+            log.setAutoGained(true);
+            log.setExp(100);
+            log.setGold(100);
+            log.setFlower(10);
             ja.add(log);
         }
         Map<String, String> headMap = new LinkedHashMap<String, String>();
-        headMap.put("id", "id");
-        headMap.put("tenantId", "tenantId");
-        headMap.put("uid", "uid");
-        headMap.put("source", "source");
-        headMap.put("title", "title");
-        headMap.put("rewardCode", "rewardCode");
-        headMap.put("rewards", "rewards");
-        headMap.put("autoGained", "autoGained");
-        headMap.put("createTime", "createTime");
-        headMap.put("updateTime", "updateTime");
+        headMap.put("title", "奖励标题");
+        headMap.put("uid", "用户uid");
+        headMap.put("exp", "经验");
+        headMap.put("gold", "金币");
+        headMap.put("flower", "鲜花");
+        headMap.put("guardCoin", "守护币");
+        headMap.put("guardTicket", "守护券");
+        headMap.put("ticket", "抽奖券");
+        headMap.put("autoGained", "自动发放(true)/手动领取(false)");
 
+
+        HashOperations<String,String,UserRewardImportLog> opsForHash;
         String title = "测试";
         /*
         OutputStream outXls = new FileOutputStream("E://a.xls");

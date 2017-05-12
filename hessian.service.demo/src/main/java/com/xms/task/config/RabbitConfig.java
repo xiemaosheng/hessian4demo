@@ -31,7 +31,7 @@ public class RabbitConfig {
     @Value("${rabbit.password}")
     private String rabbitPassword;
     @Value("${rabbit.port}")
-    private Integer rabbitPort;
+    private String rabbitPort;
 
     @Bean
     public ConnectionFactory connectionFactory() {
@@ -40,7 +40,7 @@ public class RabbitConfig {
         rabbitFactory.setVirtualHost(rabbitVhost);
         rabbitFactory.setUsername(rabbitUsername);
         rabbitFactory.setPassword(rabbitPassword);
-        rabbitFactory.setPort(rabbitPort);
+        rabbitFactory.setPort(Integer.parseInt(rabbitPort));
         return new CachingConnectionFactory(rabbitFactory);
     }
 

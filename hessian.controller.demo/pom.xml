@@ -250,6 +250,12 @@
             <version>3.14</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.6.0.RELEASE</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>hessian.controller.demo</finalName>
