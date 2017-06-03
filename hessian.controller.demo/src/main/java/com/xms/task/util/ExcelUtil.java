@@ -20,10 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2017/4/26 0026.
@@ -318,12 +315,30 @@ public class ExcelUtil {
     public static void main(String[] args) throws IOException {
         int count = 100000;
         JSONArray ja = new JSONArray();
-        for (long i = 0; i < 2; i++) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("1", "145310");
+        map.put("2", "300100");
+        map.put("3", "940418");
+        map.put("4", "833833");
+        map.put("5", "108878");
+        map.put("6", "392016");
+        map.put("7", "924450");
+        map.put("8", "450026");
+        map.put("9", "100013");
+        map.put("10", "820514");
+
+        for (long i = 0; i < 10; i++) {
             UserRewardImportLog log = new UserRewardImportLog();
 
             log.setTitle("没有奖励");
-            log.setUid(145310l);
-            log.setAutoGained(true);
+
+            log.setUid(Long.parseLong(map.get(Long.toString(i+1))));
+            if ((i % 2) == 0){
+                log.setAutoGained(true);
+            }else {
+                log.setAutoGained(false);
+            }
+            
             log.setExp(100);
             log.setGold(100);
             log.setFlower(10);
@@ -341,7 +356,7 @@ public class ExcelUtil {
         headMap.put("autoGained", "自动发放(true)/手动领取(false)");
 
 
-        HashOperations<String,String,UserRewardImportLog> opsForHash;
+        HashOperations<String, String, UserRewardImportLog> opsForHash;
         String title = "测试";
         /*
         OutputStream outXls = new FileOutputStream("E://a.xls");

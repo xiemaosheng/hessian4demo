@@ -33,7 +33,7 @@ public class ExampleExecutorService implements Executor<Collection<User>,Object>
     }
 
     @Override
-    public Object executo(Collection<User> arg) throws Exception {
+    public Object executor(Collection<User> arg) throws Exception {
         // 业务逻辑
         return null;
     }

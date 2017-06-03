@@ -45,6 +45,6 @@ public class ExampleDispatcher implements ExecuteDispatcher<String,Collection<Us
             logger.error("executor id: {} not found.", id);
             // 一般抛出异常信息
         }
-        return executor.executo(data);
+        return executor.executor(data);
     }
 }
